@@ -72,17 +72,16 @@ var anchorsCache  = new AnchorsCache();
  * main
  */
 function init() {
-    view.initContainer();
-    allClassLinks = getAllClassLinks();
-    if (allClassLinks.length <= 0) {
-        return false;
-    }
-    topClassLink = allClassLinks[0];
-    return true;
+  view.initContainer();
+  allClassLinks = getAllClassLinks();
+  if (allClassLinks.length <= 0) {
+    return false;
+  }
+  topClassLink = allClassLinks[0];
+  return true;
 }
 
 function search() {
-    // logTimeStart();
     if (! initialized) {
         return;
     }
@@ -102,7 +101,6 @@ function search() {
     } else {
         selectClasses();
     }
-    // logTimeStop();
 }
 
 function getAllClassLinks() {
@@ -254,9 +252,6 @@ function openMenu(node) {
     var href = node.getAttribute("href");
     openInClassFrame(href);
 }
-
-
-
 /**
  * ClassLink
  */
@@ -319,7 +314,6 @@ ClassLink.prototype._getDocumentBase = function() {
     ClassLink.prototype.documentBase = url;
     return url;
 }
-
 /**
  * Query
  */
@@ -494,7 +488,6 @@ Query.prototype.isAnchorMode = function() {
 Query.prototype.isMenuMode = function() {
     return this.mode == Query.MENU_MODE;
 }
-
 /**
  * View
  */
@@ -650,8 +643,6 @@ Container.prototype.print = function(msg) {
 Container.prototype.setOriginal = function() {
     this.setContentNode(this.master);
 }
-
-
 /**
  * AnchorsLoader
  */
@@ -670,7 +661,8 @@ AnchorsLoader.prototype.load = function(classLink) {
         req.onreadystatechange = function() { 
             if (req.readyState == 2) {
                 handler.loaded(req, classLink);
-            } else if (req.readyState == 4 && req.responseText) { 
+            } 
+            else if (req.readyState == 4 && req.responseText) { 
                 handler.completed(req, classLink);
             }
         };
@@ -682,7 +674,8 @@ AnchorsLoader.prototype.load = function(classLink) {
         p.onreadystatechange = function(res) {
             if (res.readyState == 2) {
                 handler.loaded(res, classLink);
-            } else if (res.readyState == 4 && res.responseText) { 
+            } 
+            else if (res.readyState == 4 && res.responseText) { 
                 handler.completed(res, classLink);
             }
         }
@@ -771,24 +764,24 @@ AnchorLink.prototype.getNameWithoutParameter = function() {
 }
 
 AnchorLink.keywords = {
-    "navbar_top":1,
-    "navbar_top_firstrow":1,
-    "skip-navbar_top":1,
-    "field_summary":1,
-    "nested_class_summary":1,
-    "constructor_summary":1,
-    "constructor_detail":1,
-    "method_summary":1,
-    "method_detail":1,
-    "field_detail":1,
-    "navbar_bottom":1,
-    "navbar_bottom_firstrow":1,
-    "skip-navbar_bottom":1
+    "navbar_top"             : 1,
+    "navbar_top_firstrow"    : 1,
+    "skip-navbar_top"        : 1,
+    "field_summary"          : 1,
+    "nested_class_summary"   : 1,
+    "constructor_summary"    : 1,
+    "constructor_detail"     : 1,
+    "method_summary"         : 1,
+    "method_detail"          : 1,
+    "field_detail"           : 1,
+    "navbar_bottom"          : 1,
+    "navbar_bottom_firstrow" : 1,
+    "skip-navbar_bottom"     : 1
 };
 
 AnchorLink.keywordPrefixes = [
     "methods_inherited_from_",
-    "fields_inherited_from_",
+    "fields_inherited_from_" ,
     "nested_classes_inherited_from_"
 ];
 
@@ -796,7 +789,7 @@ AnchorLink.prototype._getKeywordOrNot = function(name) {
     if (AnchorLink.keywords[name] == 1) {
         return true;
     }
-    for (var i = 0; i < AnchorLink.keywordPrefixes.length; i++) {
+    for (var i = 0 ; i < AnchorLink.keywordPrefixes.length ; i++) {
         if (name.indexOf(AnchorLink.keywordPrefixes[i]) == 0) {
             return true;
         }
@@ -812,7 +805,6 @@ AnchorLink.prototype._getHtml = function(name, url, keywordOrNot) {
     html += ">" + name + "</a></li>";
     return html;
 }
-
 /**
  * AnchorsCache
  */
@@ -835,9 +827,9 @@ AnchorsCache.prototype.appendAnchors = function(parent, classLink, condition) {
     }
     
     topAnchorLink = null;
-    var html = "";
+    var html  = "";
     var count = 0;
-    for (var i = 0; i < anchorLinks.length; i++) {
+    for (var i = 0 ; i < anchorLinks.length ; i++) {
         var al = anchorLinks[i];
         if (condition(al)) {
             count++;
@@ -862,7 +854,6 @@ AnchorsCache.prototype.appendAnchors = function(parent, classLink, condition) {
 view.initSearchField();
 view.focusField();
 initialized = init();
-
 /*
  * utils
  */
@@ -872,7 +863,7 @@ function selectAnyType(xpath) {
 }
 
 
-var framesets = parent.frames[0].parent.document.getElementsByTagName("frameset");
+var framesets = parent.document.getElementsByTagName("frameset");
 framesets[1].rows = '0%,100%';
 
 })();
