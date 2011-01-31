@@ -561,6 +561,7 @@ View.prototype._getHeadingNode = function() {
 
 View.prototype._createSearchField = function() {
   var s = document.createElement("input");
+  s.style.width = '100%';
   s.setAttribute("type", "text");
   s.addEventListener("keyup" , function(e) {
       if (e.keyCode == 13) {
@@ -580,6 +581,7 @@ View.prototype._createSearchField = function() {
   s.addEventListener("focus" , function(e) { 
       document.body.scrollLeft = 0;
     } , false);
+
 
   if (SEARCH_ACCESS_KEY != null && SEARCH_ACCESS_KEY != "") {
     s.setAttribute("accesskey", SEARCH_ACCESS_KEY);
